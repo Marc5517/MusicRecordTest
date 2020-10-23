@@ -10,7 +10,8 @@ namespace MusicRecordTest
     [TestClass]
     public class UnitTest1
     {
-        private static readonly string DriverDirectory = "C:\\Users\\trist\\Downloads\\chromedriver_win32real";
+        //private static readonly string DriverDirectory = "C:\\Users\\trist\\Downloads\\chromedriver_win32real";
+        private static readonly string DriverDirectory = "C:\\Users\\Marc\\Downloads\\selenium";
         private static IWebDriver _driver;
 
         // https://www.automatetheplanet.com/mstest-cheat-sheet/
@@ -40,11 +41,11 @@ namespace MusicRecordTest
             IWebElement buttonElement = _driver.FindElement(By.Id("getAllButton"));
             buttonElement.Click();
 
-            //IWebElement carList = _driver.FindElement(By.Id("carlist")); // No such element
+            //IWebElement carList = _driver.FindElement(By.Id("recordlist")); // No such element
 
             WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10)); // decorator pattern?
             IWebElement recordList = wait.Until(d => d.FindElement(By.Id("recordlist")));
-            Assert.IsTrue(recordList.Text.Contains(""));
+            Assert.IsTrue(recordList.Text.Contains("I'm still standing"));
         }
     }
 }
