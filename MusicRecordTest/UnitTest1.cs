@@ -10,8 +10,8 @@ namespace MusicRecordTest
     [TestClass]
     public class UnitTest1
     {
-        private static readonly string DriverDirectory = "C:\\Users\\trist\\Downloads\\chromedriver_win32real";
-        //private static readonly string DriverDirectory = "C:\\Users\\Marc\\Downloads\\selenium";
+        //private static readonly string DriverDirectory = "C:\\Users\\trist\\Downloads\\chromedriver_win32real";
+        private static readonly string DriverDirectory = "C:\\Users\\Marc\\Downloads\\selenium";
         private static IWebDriver _driver;
 
         // https://www.automatetheplanet.com/mstest-cheat-sheet/
@@ -32,7 +32,7 @@ namespace MusicRecordTest
         }
 
         [TestMethod]
-        public void TestMethod1()
+        public void TestMethod1Task1()
         {
             _driver.Navigate().GoToUrl("http://localhost:3000/");
             string title = _driver.Title;
@@ -49,7 +49,7 @@ namespace MusicRecordTest
         }
 
         [TestMethod]
-        public void TestMethod2()
+        public void TestMethod2Task1()
         {
             _driver.Navigate().GoToUrl("http://localhost:3000/");
 
@@ -61,6 +61,47 @@ namespace MusicRecordTest
             WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10)); // decorator pattern?
             IWebElement recordList = wait.Until(d => d.FindElement(By.Id("recordlist")));
             Assert.IsTrue(recordList.Text.Contains("I'm still standing"));
+        }
+
+        [TestMethod]
+        public void TestMethod1Task2()
+        {
+            _driver.Navigate().GoToUrl("http://localhost:3000/");
+
+            //IWebElement searchWriting = _driver.FindElement(By.Id("searchId"));
+            //searchWriting.SendKeys("I'm still standing");
+            IWebElement buttonElement = _driver.FindElement(By.Id("getByTitle"));
+            buttonElement.Click();
+
+            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            IWebElement recordList = wait.Until(d => d.FindElement(By.Id("recordlist")));
+            Assert.IsTrue(recordList.Text.Contains("I'm still standing"));
+        }
+
+        [TestMethod]
+        public void TestMethod2Task2()
+        {
+            _driver.Navigate().GoToUrl("http://localhost:3000/");
+
+            IWebElement buttonElement = _driver.FindElement(By.Id("getByArtist"));
+            buttonElement.Click();
+
+            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            IWebElement recordList = wait.Until(d => d.FindElement(By.Id("recordlist")));
+            Assert.IsTrue(recordList.Text.Contains("The Fat Rat"));
+        }
+
+        [TestMethod]
+        public void TestMethod3Task2()
+        {
+            _driver.Navigate().GoToUrl("http://localhost:3000/");
+
+            IWebElement buttonElement = _driver.FindElement(By.Id("getByYearOfPublication"));
+            buttonElement.Click();
+
+            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            IWebElement recordList = wait.Until(d => d.FindElement(By.Id("recordlist")));
+            Assert.IsTrue(recordList.Text.Contains("2000"));
         }
     }
 }
